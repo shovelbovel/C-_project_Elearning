@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol id="icon-search" viewBox="0 0 24 24">
+    <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79L20 21.5 21.5 20l-5.99-6z" fill="currentColor"/>
+  </symbol>
+  <symbol id="icon-user" viewBox="0 0 24 24">
+    <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-4.4 0-8 2.2-8 4v2h16v-2c0-1.8-3.6-4-8-4z" fill="currentColor"/>
+  </symbol>
+  <symbol id="icon-sun" viewBox="0 0 24 24"><path d="M6.76 4.84l-1.8-1.79L3.17 4.84l1.79 1.79 1.8-1.79zM1 13h3v-2H1v2zm10-9h2V1h-2v3zm7.03 2.05l1.79-1.8-1.79-1.79-1.8 1.79 1.8 1.8zM17.24 19.16l1.8 1.79 1.79-1.79-1.79-1.79-1.8 1.79zM20 11v2h3v-2h-3zM12 7a5 5 0 100 10 5 5 0 000-10zM4.24 19.16l1.8-1.79-1.8-1.79-1.79 1.79 1.79 1.79z" fill="currentColor"/></symbol>
+  <symbol id="icon-moon" viewBox="0 0 24 24"><path d="M12.3 2.1c.2 0 .4 0 .6.1C10.9 3 9.1 4.5 8 6.6c-1.9 3.3-1.1 7.4 2 9.6 3.2 2.2 7.5 1.8 10.2-1.1C22 13.3 22.6 9 20.5 6.1 18.4 3.2 15.1 2.1 12.3 2.1c0 0 0 0 0 0z" fill="currentColor"/></symbol>
+</svg>

@@ -1,0 +1,45 @@
+@model Elearning.Models.User
+
+@{
+    ViewData["Title"] = "Edit Profile";
+}
+
+<h1>Edit Profile</h1>
+
+<form method="post" asp-action="Edit" class="needs-validation" novalidate>
+    <input type="hidden" asp-for="Id" />
+    <div class="mb-3">
+        <label class="form-label">Full name</label>
+        <input asp-for="FullName" class="form-control" required />
+        <div class="invalid-feedback">Please enter your full name.</div>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input asp-for="Email" class="form-control" required />
+        <div class="invalid-feedback">Please enter a valid email.</div>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">New Password (leave blank to keep current)</label>
+        <input name="newPassword" type="password" class="form-control" minlength="6" />
+        <div class="invalid-feedback">Password must be at least 6 characters.</div>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+@section Scripts {
+    <script>
+        (function () {
+            'use strict'
+            var forms = document.querySelectorAll('.needs-validation')
+            Array.prototype.slice.call(forms).forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        })()
+    </script>
+}

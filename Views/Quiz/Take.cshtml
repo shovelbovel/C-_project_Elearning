@@ -1,0 +1,104 @@
+@model Elearning.Models.Quiz
+
+@{
+    ViewData["Title"] = "Take Quiz - " + Model.Title;
+    var totalQuestions = Model.Questions?.Count() ?? 0;
+}
+
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-start mb-3">
+            <div>
+                <h2 class="h4 mb-1">@Model.Title</h2>
+                <div class="text-muted small">@Model.Questions?.Count() ?? 0 questions</div>
+            </div>
+            <div class="text-end">
+                <span class="badge bg-primary">Pass: @Model.PassPercentage% </span>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="progress" style="height:10px;">
+                <div id="quizProgressBar" class="progress-bar bg-success" role="progressbar" style="width:0%" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <div id="quizProgressText" class="small text-muted mt-1">0/@totalQuestions answered</div>
+        </div>
+
+        <form method="post" asp-action="Submit">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="quizId" value="@Model.Id" />
+
+            @foreach (var q in Model.Questions.OrderBy(q => q.Order))
+            {
+                <div id="qcard_@q.Id" class="question-card border rounded p-3 mb-3 shadow-sm" data-qid="@q.Id">
+                    <div class="d-flex align-items-center mb-2">
+                        <span class="badge bg-secondary me-2">Question @q.Order</span>
+                        <h5 class="mb-0">@q.Text</h5>
+                    </div>
+
+                    <div class="list-group list-group-flush">
+                        @foreach (var a in q.Answers)
+                        {
+                            <label class="list-group-item d-flex align-items-center mb-1 rounded option-label" data-qid="@q.Id" data-aid="@a.Id">
+                                <input class="form-check-input me-3" type="radio" name="answer_@q.Id" id="answer_@a.Id" value="@a.Id" />
+                                <div class="option-text">@a.Text</div>
+                            </label>
+                        }
+                    </div>
+                </div>
+            }
+
+            <div class="d-grid mt-3">
+                <button type="submit" class="btn btn-lg btn-primary">Submit Quiz</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var total = @totalQuestions;
+            var radios = Array.from(document.querySelectorAll('input[type="radio"]'));
+
+            function updateProgress() {
+                var answeredNames = new Set();
+                radios.forEach(function (r) { if (r.checked) answeredNames.add(r.name); });
+
+                var count = answeredNames.size;
+                var pct = total > 0 ? Math.round(count / total * 100) : 0;
+
+                var bar = document.getElementById('quizProgressBar');
+                var text = document.getElementById('quizProgressText');
+                if (bar) bar.style.width = pct + '%';
+                if (text) text.textContent = count + '/' + total + ' answered';
+
+                // mark answered question cards
+                document.querySelectorAll('.question-card').forEach(function (card) {
+                    var qid = card.dataset.qid;
+                    if (answeredNames.has('answer_' + qid)) {
+                        card.classList.add('border-success');
+                        card.classList.remove('border-secondary');
+                    } else {
+                        card.classList.remove('border-success');
+                    }
+                });
+
+                // visually mark selected options
+                document.querySelectorAll('.option-label').forEach(function (lbl) {
+                    var qid = lbl.dataset.qid;
+                    var aid = lbl.dataset.aid;
+                    var input = document.getElementById('answer_' + aid);
+                    if (input && input.checked) {
+                        lbl.classList.add('selected');
+                    } else {
+                        lbl.classList.remove('selected');
+                    }
+                });
+            }
+
+            radios.forEach(function (r) { r.addEventListener('change', updateProgress); });
+            updateProgress();
+        });
+    </script>
+}

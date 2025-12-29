@@ -1,0 +1,39 @@
+@model Elearning.Models.Course
+
+@{
+    ViewData["Title"] = "Edit Course";
+}
+
+<h1>Edit Course</h1>
+
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    <input asp-for="Id" type="hidden" />
+    <div class="mb-3">
+        <label class="form-label">Title</label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Description</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Category</label>
+        <input asp-for="Category" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Course image</label>
+        <input type="file" name="imageFile" class="form-control" accept="image/*" />
+        @if (!string.IsNullOrEmpty(Model.ImagePath))
+        {
+            <div class="mt-2">
+                <img src="~/@Model.ImagePath" alt="Course image" class="img-thumbnail" style="max-width:200px;" />
+            </div>
+        }
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,33 @@
+@model IEnumerable<Elearning.Models.Result>
+
+@{
+    ViewData["Title"] = "Student Dashboard";
+}
+
+<h1>Student Dashboard</h1>
+
+<p>Your quiz results:</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Quiz</th>
+            <th>Score</th>
+            <th>Max Score</th>
+            <th>Passed</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var r in Model)
+        {
+            <tr>
+                <td>@r.Quiz?.Title</td>
+                <td>@r.Score</td>
+                <td>@r.MaxScore</td>
+                <td>@(r.Passed ? "Yes" : "No")</td>
+                <td>@r.TakenAt.ToLocalTime()</td>
+            </tr>
+        }
+    </tbody>
+</table>

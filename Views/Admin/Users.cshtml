@@ -1,0 +1,29 @@
+@model IEnumerable<Elearning.Models.User>
+
+@{
+    ViewData["Title"] = "Manage Users";
+}
+
+<h1>Users</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.FullName</td>
+                <td>@user.Email</td>
+                <td>@user.Role?.Name</td>
+            </tr>
+        }
+    </tbody>
+</table>

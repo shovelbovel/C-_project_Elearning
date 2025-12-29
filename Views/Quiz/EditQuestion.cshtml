@@ -1,0 +1,72 @@
+@model Elearning.Models.Question
+
+@{
+    ViewData["Title"] = "Edit Question";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h2>Edit Question</h2>
+
+        <form method="post" asp-action="EditQuestion" asp-route-id="@Model.Id">
+            @Html.AntiForgeryToken()
+            <div class="mb-3">
+                <label class="form-label">Question text</label>
+                <input name="text" value="@Model.Text" class="form-control" />
+            </div>
+            <div class="d-grid">
+                <button class="btn btn-primary">Save</button>
+            </div>
+        </form>
+
+        <hr />
+
+        <h4>Answers</h4>
+        @if(TempData["Error"] != null){ <div class="alert alert-danger">@TempData["Error"]</div> }
+        <form method="post" asp-action="AddAnswer">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="questionId" value="@Model.Id" />
+            <div class="input-group mb-3">
+                <input name="text" class="form-control" placeholder="Answer text" />
+                <label class="input-group-text">
+                    <input type="checkbox" name="isCorrect" value="true" /> Correct
+                </label>
+                <button class="btn btn-outline-primary">Add Answer</button>
+            </div>
+        </form>
+
+        <ul class="list-group">
+            @foreach (var a in Model.Answers)
+            {
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        @a.Text
+                        @if (a.IsCorrect) { <span class="badge bg-success ms-2">Correct</span> }
+                    </div>
+                    <div>
+                        <a class="btn btn-sm btn-outline-secondary me-1" asp-action="EditAnswer" asp-route-id="@a.Id">Edit</a>
+                        <form method="post" asp-action="DeleteAnswer" asp-route-id="@a.Id" class="d-inline" onsubmit="return confirmDelete(this);">
+                            @Html.AntiForgeryToken()
+                            <button class="btn btn-sm btn-outline-danger">Delete</button>
+                        </form>
+                    </div>
+                </li>
+            }
+        </ul>
+
+        <a asp-action="Manage" asp-route-id="@Model.QuizId" class="btn btn-link mt-3">Back to quiz</a>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function confirmDelete(form){
+            // If deleting a correct answer, warn if it's the last one. Server will still prevent it.
+            var isCorrectBadge = form.closest('li').querySelector('.badge');
+            if(isCorrectBadge){
+                return confirm('This answer is marked correct. Deleting it may leave the question without a correct answer. Continue?');
+            }
+            return true;
+        }
+    </script>
+}

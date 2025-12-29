@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset='utf-8' />
+  <meta name='viewport' content='width=device-width,initial-scale=1' />
+  <title>Certificate of Completion</title>
+  <style>
+    @media print { body { -webkit-print-color-adjust: exact; } }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; color: #0b2b3a; margin:0; padding:0; background: #f6f8fa; }
+    .page { width:100%; max-width:1000px; margin:30px auto; padding:28px; box-sizing:border-box; }
+    .certificate { background: white; padding:36px; border-radius:14px; box-shadow: 0 18px 50px rgba(11,43,58,0.06); border: 1px solid rgba(11,43,58,0.04); position:relative; overflow:hidden; }
+
+    /* Decorative corner */
+    .corner { position:absolute; right:-120px; top:-120px; width:320px; height:320px; background: linear-gradient(135deg, rgba(43,108,176,0.06), rgba(43,108,176,0.02)); transform:rotate(25deg); opacity:0.9; }
+
+    .header { display:flex; align-items:center; gap:18px; margin-bottom:4px; }
+    .brand { display:flex; flex-direction:column; justify-content:center; }
+    .brand .org { font-weight:700; color:#1f4e79; font-size:18px; letter-spacing:0.4px; }
+    .brand .tag { color:#6b7b83; font-size:12px; margin-top:2px; }
+
+    .ribbon { display:inline-block; padding:6px 12px; background: linear-gradient(90deg,#f6c85f,#f0b429); color:#3a2b00; font-weight:700; border-radius:999px; box-shadow: 0 6px 18px rgba(240,180,41,0.12); font-size:12px; }
+
+    .title { text-align:center; margin-top:8px; }
+    .title h1 { font-size:32px; margin:6px 0; color:#0b2b3a; }
+    .title p.lead { margin:0; color:#516977; font-size:14px; }
+
+    .recipient { margin-top:18px; text-align:center; }
+    .recipient .name { font-size:30px; font-weight:700; color:#0b2430; margin:8px 0; letter-spacing:-0.4px; }
+    .recipient .meta { color:#516977; font-size:14px; margin-bottom:6px; }
+    .recipient .course { font-size:18px; font-weight:600; color:#133349; margin-top:8px; }
+
+    .details { display:flex; gap:18px; justify-content:center; margin-top:28px; flex-wrap:wrap; }
+    .stat { min-width:160px; padding:14px 18px; border-radius:10px; background:linear-gradient(180deg,#fbfdff,#f8fbff); border:1px solid rgba(11,43,58,0.04); text-align:center; box-shadow: 0 6px 18px rgba(11,43,58,0.04); }
+    .stat .big { font-size:20px; font-weight:700; color:#0b2b3a; }
+    .stat .small { font-size:12px; color:#657f8d; margin-top:6px; }
+
+    .footer { margin-top:28px; display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; }
+    .signature { text-align:left; }
+    .sig-line { width:220px; height:1px; background:linear-gradient(90deg, rgba(11,43,58,0.12), rgba(11,43,58,0)); margin-top:18px; }
+    .verify { text-align:right; font-size:12px; color:#2b6cb0; }
+    .verify a { color:#2b6cb0; text-decoration:none; }
+
+    .small-note { margin-top:10px; font-size:11px; color:#9aa8b4; }
+
+    @media (max-width:520px) { .details { flex-direction:column; align-items:center; } .verify { text-align:left; } }
+  </style>
+</head>
+<body>
+  <div class='page'>
+    <div class='certificate'>
+      <div class='corner' aria-hidden='true'></div>
+
+      <div class='header'>
+        <div class='brand'>
+          <div class='org'>Informatique</div>
+          <div class='tag'>Practical online courses & certifications</div>
+        </div>
+        <div style='flex:1'></div>
+        <div class='ribbon'>Certificate</div>
+      </div>
+
+      <div class='title'>
+        <h1>Certificate of Completion</h1>
+        <p class='lead'>This certifies successful completion of the course</p>
+      </div>
+
+      <div class='recipient'>
+        <div class='meta'>Presented to</div>
+        <div class='name'>salah</div>
+        <div class='course'>Quiz - Fondamentaux du d&#233;veloppement web</div>
+      </div>
+
+      <div class='details'>
+        <div class='stat'>
+          <div class='big'>5/5</div>
+          <div class='small'>Score</div>
+        </div>
+        <div class='stat'>
+          <div class='big'>Passed</div>
+          <div class='small'>Result</div>
+        </div>
+        <div class='stat'>
+          <div class='big'>2025-12-22</div>
+          <div class='small'>Issued</div>
+        </div>
+      </div>
+
+      <div class='footer'>
+        <div class='signature'>
+          <div style='font-size:13px; color:#516977;'>Authorized by</div>
+          <div style='font-weight:700; margin-top:6px;'>Informatique Team</div>
+          <div class='sig-line' aria-hidden='true'></div>
+        </div>
+
+        <div class='verify'>
+          <div style='font-size:12px; color:#6b7b83;'>Verification code</div>
+          <div style='font-weight:700; margin-top:6px; color:#153d57;'>29bf4885ea2a422ba4444cd4f723ef79</div>
+          <div class='small-note'>Verify at: <a href='https://localhost:7096/Quiz/VerifyCertificate?code=29bf4885ea2a422ba4444cd4f723ef79'>https://localhost:7096/Quiz/VerifyCertificate?code=29bf4885ea2a422ba4444cd4f723ef79</a></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

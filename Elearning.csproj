@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\assets\img\bg\**" />
+    <Compile Remove="wwwroot\assets\img\education\**" />
+    <Compile Remove="wwwroot\assets\img\NewFolder\**" />
+    <Compile Remove="wwwroot\assets\img\person\**" />
+    <Content Remove="wwwroot\assets\img\bg\**" />
+    <Content Remove="wwwroot\assets\img\education\**" />
+    <Content Remove="wwwroot\assets\img\NewFolder\**" />
+    <Content Remove="wwwroot\assets\img\person\**" />
+    <EmbeddedResource Remove="wwwroot\assets\img\bg\**" />
+    <EmbeddedResource Remove="wwwroot\assets\img\education\**" />
+    <EmbeddedResource Remove="wwwroot\assets\img\NewFolder\**" />
+    <EmbeddedResource Remove="wwwroot\assets\img\person\**" />
+    <None Remove="wwwroot\assets\img\bg\**" />
+    <None Remove="wwwroot\assets\img\education\**" />
+    <None Remove="wwwroot\assets\img\NewFolder\**" />
+    <None Remove="wwwroot\assets\img\person\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DinkToPdf" Version="1.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.12">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\assets\img\NewFolder1\" />
+  </ItemGroup>
+
+</Project>

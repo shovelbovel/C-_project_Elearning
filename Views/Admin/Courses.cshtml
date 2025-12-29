@@ -1,0 +1,51 @@
+@model IEnumerable<Elearning.Models.Course>
+
+@{
+    ViewData["Title"] = "Manage Courses";
+}
+
+<div class="d-flex align-items-center justify-content-between mb-3">
+    <h1 class="m-0">Courses</h1>
+    <a class="btn btn-primary" href="@Url.Action("Create", "Course")">Add Course</a>
+</div>
+
+<table class="table table-hover align-middle">
+    <thead>
+        <tr>
+            <th style="width:60px">Id</th>
+            <th style="width:72px">Image</th>
+            <th>Title</th>
+            <th style="width:180px">Category</th>
+            <th>Description</th>
+            <th style="width:160px">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var c in Model)
+        {
+            <tr>
+                <td>@c.Id</td>
+                <td>
+                    @if (!string.IsNullOrWhiteSpace(c.ImagePath))
+                    {
+                        <img src="@Url.Content($"~/images/courses/{c.ImagePath}")" alt="@c.Title" style="width:56px;height:56px;object-fit:cover;border-radius:8px;border:1px solid rgba(15,23,36,0.06)" />
+                    }
+                    else
+                    {
+                        <span class="text-muted">No image</span>
+                    }
+                </td>
+                <td class="fw-semibold">@c.Title</td>
+                <td><span class="badge badge-soft">@c.Category</span></td>
+                <td class="text-muted">@c.Description</td>
+                <td>
+                    <div class="d-flex gap-2">
+                        <a class="btn btn-sm btn-outline-primary" href="@Url.Action("Edit", "Course", new { id = c.Id })">Edit</a>
+                        <a class="btn btn-sm btn-outline-primary" href="@Url.Action("Details", "Course", new { id = c.Id })">Details</a>
+                        <a class="btn btn-sm btn-outline-primary" href="@Url.Action("Delete", "Course", new { id = c.Id })">Delete</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,33 @@
+@model Elearning.Models.Quiz
+
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="card">
+    <div class="card-body">
+        <h2 class="card-title">@Model.Title</h2>
+        <p class="text-muted">Course: @Model.Course?.Title</p>
+        <p><strong>Pass percentage:</strong> @Model.PassPercentage %</p>
+
+        <h4 class="mt-4">Questions</h4>
+        <ul class="list-group">
+            @foreach (var q in Model.Questions.OrderBy(q => q.Order))
+            {
+                <li class="list-group-item">
+                    @q.Text
+                    <ul class="mt-2">
+                        @foreach (var a in q.Answers)
+                        {
+                            <li>
+                                @a.Text
+                                @* Only show correct badges to Admins or when explicitly allowed (e.g., if a result is being shown) *@
+                                @if (User.IsInRole("Admin")) { <span class="badge bg-success ms-2">Correct</span> }
+                            </li>
+                        }
+                    </ul>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

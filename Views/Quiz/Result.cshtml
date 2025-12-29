@@ -1,0 +1,98 @@
+@model Elearning.Models.Result
+
+@{
+    ViewData["Title"] = "Résultat du Quiz";
+    var percentage = Model.MaxScore > 0 ? (Model.Score * 100 / Model.MaxScore) : 0;
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <!-- Résultat principal -->
+        <div class="card text-center mb-4">
+            <div class="card-body py-5">
+                @if (Model.Passed)
+                {
+                    <div class="result-icon text-success mb-3">
+                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+                            <polyline points="22,4 12,14.01 9,11.01"/>
+                        </svg>
+                    </div>
+                    <h2 class="text-success mb-2">Félicitations !</h2>
+                    <p class="text-muted">Vous avez réussi le quiz</p>
+                }
+                else
+                {
+                    <div class="result-icon text-danger mb-3">
+                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="15" y1="9" x2="9" y2="15"/>
+                            <line x1="9" y1="9" x2="15" y2="15"/>
+                        </svg>
+                    </div>
+                    <h2 class="text-danger mb-2">Essayez encore</h2>
+                    <p class="text-muted">Vous n'avez pas atteint le seuil de réussite</p>
+                }
+
+                <div class="score-display my-4">
+                    <div class="display-4 fw-bold">@Model.Score / @Model.MaxScore</div>
+                    <div class="h5 text-muted">@percentage%</div>
+                </div>
+
+                <div class="progress mb-4" style="height: 12px;">
+                    <div class="progress-bar @(Model.Passed ? "bg-success" : "bg-danger")" 
+                         role="progressbar" 
+                         style="width: @percentage%;" 
+                         aria-valuenow="@percentage" 
+                         aria-valuemin="0" 
+                         aria-valuemax="100">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Détails -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title mb-3">Détails</h5>
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="text-muted small">Quiz</div>
+                        <div class="fw-semibold">@Model.Quiz?.Title</div>
+                    </div>
+                    <div class="col-6">
+                        <div class="text-muted small">Candidat</div>
+                        <div class="fw-semibold">@Model.User?.FullName</div>
+                    </div>
+                    <div class="col-6">
+                        <div class="text-muted small">Date</div>
+                        <div class="fw-semibold">@Model.TakenAt.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</div>
+                    </div>
+                    <div class="col-6">
+                        <div class="text-muted small">Statut</div>
+                        <div>
+                            @if (Model.Passed)
+                            {
+                                <span class="badge bg-success">Réussi</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger">Échoué</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="d-flex gap-2 justify-content-center">
+            <a asp-controller="Quiz" asp-action="Take" asp-route-id="@Model.QuizId" class="btn btn-outline-primary">
+                Repasser le quiz
+            </a>
+            <a asp-controller="Course" asp-action="Details" asp-route-id="@Model.Quiz?.CourseId" class="btn btn-primary">
+                Retour au cours
+            </a>
+        </div>
+    </div>
+</div>
